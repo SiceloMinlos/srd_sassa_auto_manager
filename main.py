@@ -1,38 +1,70 @@
-from time import sleep
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as x
-from selenium.webdriver.support.ui import WebDriverWait
+import json
+import requests
 
-def personData():
-    id_number = "your_id_number"
-    cell_number = "your_cell_number"
+def getUserData():
 
-    return id_number, cell_number
+    while True:
+
+        id = input("Please enter your id number: ")
+        cell_number = input("Please enter your cell number: ")
+
+        if id.isalpha():
+            id = input("Please enter your valid id number: ")
+        elif cell_number.isalpha():
+            cell_number = input("Please enter your valid cell number: ")
+        else:
+            return id, cell_number
 
 
-def check_online_status(id_number, cell_number):
+def getStatus(id, cell_number):
 
-    url = f'https://srd.sassa.gov.za/'
-    driver = webdriver.Chrome(ChromeDriverManager().install())
-    driver.get(url)
+    url = f'https://srd.sassa.gov.za/srdweb/api/web/outcome/{id}/{cell_number}'
+    fetch = requests.get(url)
+    results = fetch.json()
+    writeToFile(results)
 
-    WebDriverWait(driver, 10).until(x.element_to_be_clickable((By.XPATH, "//*[text()=' click here to check online ']"))).click()
+    return results
 
-    form_id_fill = driver.find_element(By.ID, 'mat-input-0')
+def writeToFile(data):
+    with open('results.json', 'w') as file:
+        file.write(json.dumps(data))
 
-    form_id_fill.send_keys(id_number)
+def monthFormatter(date):
+    months = {"JAN" : "JANUARY", "FEB" : "FEBUAURY", "MAR" : "MARCH", "APR" : "APRIL", "MAY" : "MAY", "JUN" : "JUNE", "JUL" : "JULY", "AUG" : "AUGUST", "SEP" : "SEPTEMBER", "OCT" : "OCTOBER", "NOV" : "NOVEMBER", "DEC" : "DECEMBER"}
+    date = months[date[0:3]]
 
-    form_cell_number_fill = driver.find_element(By.ID, 'mat-input-1')
+    return date
 
-    form_cell_number_fill.send_keys(cell_number)
+def getApprovedOutcome(id, cell_number):
+    results = getStatus(id, cell_number)
+    outcomes = results["outcomes"]
 
-    submit_button = driver.find_element(By.CLASS_NAME, 'mat-button-wrapper')
+    approvedMonths = []
 
-    sleep(10)
+    for everyOutcome in outcomes:
+        if everyOutcome["outcome"] == "approved":
+            approvedMonths.append(monthFormatter(everyOutcome["period"]))
 
-    submit_button.click()
+    print(approvedMonths)
 
-id_number, cell_number = personData()
-check_online_status(id_number, cell_number)
+    return approvedMonths
+
+
+def getDeclinedOutcome(id, cell_number):
+    results = getStatus(id, cell_number)
+    outcomes = results["outcomes"]
+
+    declinedMonths = []
+
+    for everyOutcome in outcomes:
+        if everyOutcome["outcome"] == "declined":
+            declinedMonths.append(monthFormatter(everyOutcome["period"]))
+
+    print(declinedMonths)
+
+    return declinedMonths
+
+
+
+id, cell_number = getUserData()
+getDeclinedOutcome(id, cell_number)
