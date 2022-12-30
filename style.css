@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+}
+
+form {
+    top: 50%;
+    width: 550px;
+    padding-left: 50px;
+    padding-bottom: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+ label {
+    width: 200px;
+    display: inline-block;
+ }
+
+ input {
+    width: 250px;
+ }
+
+ h1 {
+    display: flex;
+    justify-content: center;
+ }
+
+ body {
+    background-color: #9b870c;
+ }
+
+.image {
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    border-radius: 10px;
+}
