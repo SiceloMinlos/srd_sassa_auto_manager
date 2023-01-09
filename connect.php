@@ -10,8 +10,9 @@ $password = $_POST['password'];
 
 //Creating new Database
 
-$connection = new mysqli('localhost', 'phpmyadmin', 'Dl5HEMzILNyF', 'register'); 
-if($connection->connect_error) {                                                                                     //if connection with database dies
+$connection = new mysqli('localhost', 'root', '', 'Register'); 
+if ($connection->connect_error) {
+    echo 'Connection error';                                                                               //if connection with database dies
     die('Connection Failed : ' . $connection->connect_error);
 } else {
     $sql = 'insert into Registration(first_name, last_name, id, cell_number, password) values(?, ?, ?, ?, ?)';       //sql statement
@@ -22,4 +23,5 @@ if($connection->connect_error) {                                                
     $stmt->close();
     $connection->close();
 }
+
 ?>

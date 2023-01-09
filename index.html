@@ -10,46 +10,89 @@
 </head>
 
 <body>
-    
-    <div class="image">
+
+    <!-- <div class="image">
         <img src="/images/logo2.png" width="70px">
-    </div>
+    </div> -->
 
     <div class="container">
-        <form action="connect.php" method="post">
 
-            <h1>Registration</h1>
+        <div id="register">
 
-            <p>
-                <label for="first name">First Name: </label>
-                <input id="first name" type="text" required name="first_name"><br>
-            </p>
+            <div id="login-register">
+                <div class="button">
+                    <button onclick="changeFormToLogin()">Login</button>
+                </div>
+                <div class="button">
+                    <button onclick="changeFormToRegister()">Register</button>
+                </div>
+            </div>
 
-            <p>
-                <label for="last name">Last Name: </label>
-                <input id="last name" type="text" required name="last_name"><br>
-            </p>
+            <form action="connect.php" method="POST">
 
-            <p>
-                <label for="id">Identification Number: </label>
-                <input id="id" type="number" required maxlength="13" name="id"><br>
-            </p>
+                <p>
+                    <label for="first name">First Name: </label>
+                    <input id="first name" type="text" required name="first_name"><br>
+                </p>
 
-            <p>
-                <label for="cell number">Cell Number: </label>
-                <input id="cell number" type="number" required maxlength="10" name="cell_number"><br>
-            </p>
+                <p>
+                    <label for="last name">Last Name: </label>
+                    <input id="last name" type="text" required name="last_name"><br>
+                </p>
 
-            <p>
-                <label for="password">Password: </label>
-                <input id="password" type="password" required name="password"><br>
-            </p>
+                <p>
+                    <label for="id">Identification Number: </label>
+                    <input id="id" type="number" required maxlength="13" name="id"><br>
+                </p>
 
-            <center>
-                <input id="submit" type="submit"><br>
-            </center>
-        </form>
+                <p>
+                    <label for="cell number">Cell Number: </label>
+                    <input id="cell number" type="number" required maxlength="10" name="cell_number"><br>
+                </p>
+
+                <p>
+                    <label for="password">Password: </label>
+                    <input id="password" type="password" required name="password"><br>
+                </p>
+
+                <center>
+                    <input id="submit" type="submit"><br>
+                </center>
+            </form>
+
+        </div>
+
+        <div id="login" hidden>
+
+            <div id="login-register">
+                <div class="button">
+                    <button onclick="changeFormToLogin()">Login</button>
+                </div>
+                <div class="button">
+                    <button onclick="changeFormToRegister()">Register</button>
+                </div>
+            </div>
+
+            <form action="login.php" method="POST">
+
+                <p>
+                    <label for="id">Identification Number: </label>
+                    <input id="id" type="number" required maxlength="13" name="id"><br>
+                </p>
+
+                <p>
+                    <label for="password">Password: </label>
+                    <input id="password" type="password" required name="password"><br>
+                </p>
+
+                <center>
+                    <input id="submit" type="submit"><br>
+                </center>
+            </form>
+        </div>
     </div>
+
+    <script src="app.js"></script>
 </body>
 
 </html>
