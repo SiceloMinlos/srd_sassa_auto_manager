@@ -14,10 +14,10 @@ if ($connection -> connect_error) {
 
     while ($row = $results -> fetch_assoc()) {
         if ($password == $row['password'] and $id == $row['id']) {
-            echo 'Connnected';
+            echo json_encode('Connected');
             break;
         } else {
-            echo 'Sorry, not connected';
+            echo json_encode('Not Connected');
             break;
         }
     }

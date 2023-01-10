@@ -10,3 +10,4 @@ function changeFormToRegister() {
     registerForm.style.display = 'block';
     loginForm.style.display = 'none';
 }
+

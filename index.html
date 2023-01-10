@@ -20,15 +20,19 @@
         <div id="register">
 
             <div id="login-register">
-                <div class="button">
-                    <button onclick="changeFormToLogin()">Login</button>
+                <div class="login-left-radius">
+                    <div class="button">
+                        <button onclick="changeFormToLogin()">Login</button>
+                    </div>
                 </div>
-                <div class="button">
-                    <button onclick="changeFormToRegister()">Register</button>
+                <div class="login-right-radius">
+                    <div class="button">
+                        <button onclick="changeFormToRegister()">Register</button>
+                    </div>
                 </div>
             </div>
 
-            <form action="connect.php" method="POST">
+            <form action="app2.js" method="POST">
 
                 <p>
                     <label for="first name">First Name: </label>
@@ -65,15 +69,19 @@
         <div id="login" hidden>
 
             <div id="login-register">
-                <div class="button">
-                    <button onclick="changeFormToLogin()">Login</button>
+                <div class="login-left-radius">
+                    <div class="button">
+                        <button onclick="changeFormToLogin()">Login</button>
+                    </div>
                 </div>
-                <div class="button">
-                    <button onclick="changeFormToRegister()">Register</button>
+                <div class="login-right-radius">
+                    <div class="button">
+                        <button onclick="changeFormToRegister()">Register</button>
+                    </div>
                 </div>
             </div>
 
-            <form action="login.php" method="POST">
+            <form onsubmit="submit()" method="POST">
 
                 <p>
                     <label for="id">Identification Number: </label>
